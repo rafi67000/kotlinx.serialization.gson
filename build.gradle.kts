@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "xyz.rafi67000.kotlinx"
-version = "1.0.1"
+version = "1.0.2"
 
 repositories {
     mavenCentral()
@@ -35,6 +35,7 @@ kotlin {
 publishing {
     publications {
         create<MavenPublication>("maven") {
+            artifactId = "kotlinx-serialization-gson"
             from(components["kotlin"])
         }
     }
