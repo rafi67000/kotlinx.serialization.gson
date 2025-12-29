@@ -8,8 +8,9 @@ import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.StringFormat
 import kotlinx.serialization.modules.SerializersModule
 
-class Gson(val gson: Gson = GsonBuilder().serializeNulls().create()) : StringFormat {
+object Gson : StringFormat {
     override val serializersModule: SerializersModule = SerializersModule {}
+    var gson: Gson = GsonBuilder().serializeNulls().create()
 
     override fun <T> encodeToString(serializer: SerializationStrategy<T>, value: T): String {
         val encoder = GsonEncoder()
@@ -21,10 +22,6 @@ class Gson(val gson: Gson = GsonBuilder().serializeNulls().create()) : StringFor
         val jsonElement = JsonParser.parseString(string)
         val decoder = GsonDecoder(jsonElement)
         return deserializer.deserialize(decoder)
-    }
-
-    companion object {
-        val default: Gson = Gson()
     }
 
 }
